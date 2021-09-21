@@ -39,7 +39,7 @@ body {
 }
 
 #next {
-    margin-left: 48px;
+    /* margin-left: 48px; */
     padding-left: 32px;
     width: 40%;
     vh: 100%;
