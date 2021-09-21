@@ -147,3 +147,29 @@ var random_div = randomArray(location_div, images_div);
 
 // hide random_div
 random_div.style.display = "none";
+
+// hide next div by default
+document.getElementById("next").style.display = "none";
+
+// show next div if text div class is clicked
+var location_divs = document.getElementsByClassName("text-div");
+
+// add click action to every item in location_divs
+for (var i = 0; i < location_divs.length; i++) {
+    location_divs[i].addEventListener("click", function() {
+        // show next div
+        document.getElementById("next").style.display = "block";
+
+        // add "active" class to selected div
+        this.classList.add("active");
+
+        // remove "active" class from all other divs
+        // add "non-active" to all other divs
+        for (var i = 0; i < location_divs.length; i++) {
+            if (location_divs[i] != this) {
+                location_divs[i].classList.remove("active");
+                location_divs[i].classList.add("non-active");
+            }
+        }
+    });
+}
