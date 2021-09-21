@@ -1,0 +1,42 @@
+body {
+    width: 65%;
+    margin: auto;
+    background-color: black;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+#location {
+    color: white;
+    padding-top: 48px;
+}
+
+.text-div {
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 64px;
+    padding-left: 16px;
+    width: 50%;
+    transition: background-color 0.3s ease-in-out, border-radius 0.1s ease-in-out;
+}
+
+.text-div:hover {
+    cursor: pointer;
+    background-color: rgba(245, 245, 245, 0.2);
+    border-radius: 16px;
+}
+
+/* Make grid of square images that fit in images id */
+#images {
+    padding-left: 16px;
+    padding-top: 48px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 10vw);
+    grid-gap: 4px;
+}
+
+#images img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
