@@ -1,0 +1,91 @@
+[
+   {
+        "base":"rock_arch",
+        "class1":"trash",
+        "class2": "habitat",
+        "class3": "flooding",
+   },
+   {
+        "base":"forest/broadleaf",
+        "class1":"fire",
+        "class2": "wildfire",
+        "class3": "forest",
+        "class4": "drought",
+        "class5": "dried"
+    },
+    {
+        "base":"crevasse",
+        "class1":"drought",
+        "class2": "dried",
+        "class3": "trash"
+    },
+    {
+        "base":"rainforest",
+        "class1":"drought",
+        "class2": "dried",
+        "class3": "trash"
+    },
+
+
+    {
+        "base":"hayfield",
+        "class1":"drought",
+        "class2": "dried",
+        "class3": "trash"
+    },
+    {
+        "base":"hot",
+        "class1":"drought",
+        "class2": "dried",
+        "class3": "trash"
+    },
+    {
+        "base":"spring",
+        "class1":"drought",
+        "class2": "dried",
+        "class3": "trash"
+    },
+    {
+        "base":"spring",
+        "class1":"drought",
+        "class2": "dried",
+        "class3": "trash"
+    },
+    {
+        "base":"pizzeria",
+        "class1":"drought",
+        "class2": "dried",
+        "class3": "trash"
+    },
+    {
+        "base":"lagoon",
+        "class1":"drought",
+        "class2": "dried",
+        "class3": "trash"
+    },
+    {
+        "base":"tree",
+        "class1":"drought",
+        "class2": "dried",
+        "class3": "trash"
+    },
+    {
+        "base":"farm",
+        "class1":"drought",
+        "class2": "dried",
+        "class3": "trash"
+    },
+    {
+        "base":"trench",
+        "class1":"drought",
+        "class2": "dried",
+        "class3": "trash"
+    },
+    {
+        "base":"boardwalk",
+        "class1":"drought",
+        "class2": "dried",
+        "class3": "trash"
+    },
+
+]

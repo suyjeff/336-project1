@@ -96,6 +96,151 @@ const gan_image_names = [
     "BigBiGAN-34.png"
 ];
 
+const classification_relations=
+[
+   {
+        base:"rock_arch",
+        class1:"trash",
+        class2: "habitat",
+        class3: "flooding",
+   },
+   {
+        base:"forest/broadleaf",
+        class1:"fire",
+        class2: "wildfire",
+        class3: "forest",
+        class4: "drought",
+        class5: "dried"
+    },
+    {
+        base:"crevasse",
+        class1:"drought",
+        class2: "dried",
+        class3: "melting"
+    },
+    {
+        base:"rainforest",
+        class3: "smog"
+    },
+
+
+    {
+        base:"hayfield",
+        class1:"fire",
+        class2: "drought"
+    },
+    {
+        base:"hot",
+        class1:"fire",
+        class2: "wildfire"
+    },
+    {
+        base:"spring",
+        class1:"forest",
+        class2: "level"
+    },
+    {
+        base:"pizzeria",
+        class1:"trash",
+    },
+    {
+        base:"lagoon",
+        class1:"reef",
+        class2: "coral",
+        class3: "water",
+        class4: "flooding"
+    },
+    {
+        base:"tree",
+        class1:"drought"
+    },
+    {
+        base:"farm",
+        class1:"drought",
+        class2: "dried",
+    },
+    {
+        base:"trench",
+        class1:"drought",
+        class2: "rivers",
+    },
+    {
+        base:"boardwalk",
+        class1:"drought",
+        class2: "dried",
+    },
+    {
+        base:"hot",
+        class1:"drought",
+        class2: "dried",
+        class3: "trash"
+    },
+    {
+        base:"landfill",
+        class1:"drought",
+        class2: "dried",
+        class3: "trash"
+    },
+    {
+        base:"desert/sand",
+        class1:"drought",
+        class2: "dried",
+        class3: "trash"
+    },
+    {
+        base:"beach",
+        class1:"melting",
+        class2: "dried"    
+    },
+    {
+        base:"volcano",
+        class1:"drought",
+        class2: "dried",
+        class3: "trash"
+    },
+    {
+        base:"temple/asia",
+        class1:"drought",
+        class2: "dried",
+        class3: "trash"
+    },
+    {
+        base:"cliff",
+        class1:"drought",
+        class2: "dried",
+        class3: "trash"
+    },
+    {
+        base:"rock",
+        class1:"drought",
+        class2: "dried",
+        class3: "trash"
+    },
+    {
+        base:"slope",
+        class1:"drought",
+        class2: "dried",
+        class3: "trash"
+    },
+    {
+        base:"field/cultivated",
+        class1:"drought",
+        class2: "dried",
+        class3: "trash"
+    },
+    {
+        base:"stage",
+        class1:"wildfire",
+        class2: "dried",
+        class3: "trash"
+    },
+    {
+        base:"islet",
+        class1:"rivers",
+        class2: "flooding"   
+    },
+]
+
 // randomly choose one of two arrays
 const randomArray = (arr1, arr2) => {
     const rand = Math.random();
@@ -171,5 +316,22 @@ for (var i = 0; i < location_divs.length; i++) {
                 location_divs[i].classList.add("non-active");
             }
         }
+
+        // populate next div with text from the array not chosen
+        var next_div = document.getElementById("next");
+        next_div.innerHTML = "";
+        var next_Array = randomArray(classifications, crises);
+        var next_Array_sorted = next_Array.sort(() => Math.random() - 0.5);
+        for (var i = 0; i < next_Array_sorted.length; i++) {
+            var text_div = document.createElement("div");
+            text_div.className = "text-div";
+            text_div.innerHTML = next_Array_sorted[i];
+            next_div.appendChild(text_div);
+        }
+    
     });
 }
+
+// randomly assign display grid to #location
+var rand_grid = Math.floor(Math.random() * 2);
+
