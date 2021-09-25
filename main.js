@@ -96,151 +96,6 @@ const gan_image_names = [
     "BigBiGAN-34.png"
 ];
 
-const classification_relations=
-[
-   {
-        base:"rock_arch",
-        class1:"trash",
-        class2: "habitat",
-        class3: "flooding",
-   },
-   {
-        base:"forest/broadleaf",
-        class1:"fire",
-        class2: "wildfire",
-        class3: "forest",
-        class4: "drought",
-        class5: "dried"
-    },
-    {
-        base:"crevasse",
-        class1:"drought",
-        class2: "dried",
-        class3: "melting"
-    },
-    {
-        base:"rainforest",
-        class3: "smog"
-    },
-
-
-    {
-        base:"hayfield",
-        class1:"fire",
-        class2: "drought"
-    },
-    {
-        base:"hot",
-        class1:"fire",
-        class2: "wildfire"
-    },
-    {
-        base:"spring",
-        class1:"forest",
-        class2: "level"
-    },
-    {
-        base:"pizzeria",
-        class1:"trash",
-    },
-    {
-        base:"lagoon",
-        class1:"reef",
-        class2: "coral",
-        class3: "water",
-        class4: "flooding"
-    },
-    {
-        base:"tree",
-        class1:"drought"
-    },
-    {
-        base:"farm",
-        class1:"drought",
-        class2: "dried",
-    },
-    {
-        base:"trench",
-        class1:"drought",
-        class2: "rivers",
-    },
-    {
-        base:"boardwalk",
-        class1:"drought",
-        class2: "dried",
-    },
-    {
-        base:"hot",
-        class1:"drought",
-        class2: "dried",
-        class3: "trash"
-    },
-    {
-        base:"landfill",
-        class1:"drought",
-        class2: "dried",
-        class3: "trash"
-    },
-    {
-        base:"desert/sand",
-        class1:"drought",
-        class2: "dried",
-        class3: "trash"
-    },
-    {
-        base:"beach",
-        class1:"melting",
-        class2: "dried"    
-    },
-    {
-        base:"volcano",
-        class1:"drought",
-        class2: "dried",
-        class3: "trash"
-    },
-    {
-        base:"temple/asia",
-        class1:"drought",
-        class2: "dried",
-        class3: "trash"
-    },
-    {
-        base:"cliff",
-        class1:"drought",
-        class2: "dried",
-        class3: "trash"
-    },
-    {
-        base:"rock",
-        class1:"drought",
-        class2: "dried",
-        class3: "trash"
-    },
-    {
-        base:"slope",
-        class1:"drought",
-        class2: "dried",
-        class3: "trash"
-    },
-    {
-        base:"field/cultivated",
-        class1:"drought",
-        class2: "dried",
-        class3: "trash"
-    },
-    {
-        base:"stage",
-        class1:"wildfire",
-        class2: "dried",
-        class3: "trash"
-    },
-    {
-        base:"islet",
-        class1:"rivers",
-        class2: "flooding"   
-    },
-]
-
 // randomly choose one of two arrays
 const randomArray = (arr1, arr2) => {
     const rand = Math.random();
@@ -267,7 +122,8 @@ for (var i = 0; i < random_Array.length; i++) {
 }
 
 // get random image array
-const randomImage = randomArray(og_image_names, gan_image_names);
+// const randomImage = randomArray(og_image_names, gan_image_names);
+const randomImage = randomArray(og_image_names);
 
 // fetch og_image_names elemnts in random order
 var randImgArr = randomImage.sort(() => Math.random() - 0.5);
@@ -298,15 +154,18 @@ document.getElementById("next").style.display = "none";
 
 // show next div if text div class is clicked
 var location_divs = document.getElementsByClassName("text-div");
+document.getElementById("overlay").style.display = "none";
 
 // add click action to every item in location_divs
 for (var i = 0; i < location_divs.length; i++) {
     location_divs[i].addEventListener("click", function() {
         // show next div
-        document.getElementById("next").style.display = "block";
+        document.getElementById("next").style.display = "flex";
 
         // add "active" class to selected div
         this.classList.add("active");
+        
+        document.getElementById("overlay-text").innerHTML = this.innerHTML;
 
         // remove "active" class from all other divs
         // add "non-active" to all other divs
@@ -318,20 +177,98 @@ for (var i = 0; i < location_divs.length; i++) {
         }
 
         // populate next div with text from the array not chosen
-        var next_div = document.getElementById("next");
-        next_div.innerHTML = "";
+        var next_div = document.getElementById("text-container");
+        // next_div.innerHTML = "";
         var next_Array = randomArray(classifications, crises);
         var next_Array_sorted = next_Array.sort(() => Math.random() - 0.5);
         for (var i = 0; i < next_Array_sorted.length; i++) {
             var text_div = document.createElement("div");
-            text_div.className = "text-div";
+            text_div.className = "text-div-2";
+            text_div.addEventListener("click", function() {
+                this.classList.add("active2");
+                document.getElementById("overlay-subtext").innerHTML = this.innerHTML;
+            });
             text_div.innerHTML = next_Array_sorted[i];
             next_div.appendChild(text_div);
-        }
-    
+            if (i < 3) {
+                next_div.addEventListener("click", function() {
+                    var rand_image = Math.floor(Math.random() * og_image_names.length);
+                    var image_div = document.createElement("div");
+                    image_div.className = "image-div";
+                    image_div.innerHTML = "<img src='og_images/" + og_image_names[rand_image] + "'>";
+                    image_div.addEventListener("click", function() {
+                        document.getElementById("overlay").style.display = "flex";
+                    });
+                    document.getElementById("image-container").appendChild(image_div);
+                });
+            }           
+        }   
     });
 }
 
 // randomly assign display grid to #location
 var rand_grid = Math.floor(Math.random() * 2);
 
+// edit image-container every time text-container element is clicked
+var text_container = document.getElementById("text-container");
+text_container.addEventListener("click", function() {
+    document.getElementById("image-container").innerHTML = "";
+    var rand_image = Math.floor(Math.random() * og_image_names.length);
+    var image_div = document.createElement("div");
+    image_div.className = "image-div";
+    image_div.innerHTML = "<img src='og_images/" + og_image_names[rand_image] + "'>";
+    document.getElementById("image-container").appendChild(image_div);
+});
+
+var overlay_content = document.getElementById("overlay-content");
+
+// sort gan_image_names array in random order
+var gan_image_names_sorted = gan_image_names.sort(() => Math.random() - 0.5);
+
+// populate overlay_content with 4 images from gan_image_names
+for (var i = 0; i < 4; i++) {
+    overlay_content.innerHTML += "<img src='gan_images/" + gan_image_names_sorted[i] + "'>";
+}
+
+var overlay_divs = document.getElementsByClassName("text-div-2");
+for (var i = 0; i < overlay_divs.length; i++) {
+    if (this.className.includes("active2")) {
+        overlay_content.innerHTML = "hello";
+ 
+    }
+}
+
+
+// store 4 elements randomClassifications and put in array
+for (var i = 0; i < 4; i++) {
+    var aoText = document.createElement("div");
+    aoText.className = "text-div-3"; 
+    aoText.innerHTML = randomClassification[i];
+    document.getElementById("another-overlay").appendChild(aoText);
+}
+
+// if chosen div is image_div
+if (random_div.className != "a9") {
+    $(document).ready(function() {
+        $(this).on("click", function(e) {
+            var x = e.pageX;
+            var y = e.pageY;
+            var el = $("#another-overlay");
+            el.css('position', 'absolute');
+            el.css("left", x);
+            el.css("top", y);
+            el.css("display", "block");
+        })
+    })
+}
+
+// assign click action to text-div-3
+var text_div_3 = document.getElementsByClassName("text-div-3");
+for (var i = 0; i < text_div_3.length; i++) {
+    text_div_3[i].addEventListener("click", function() {
+        document.getElementById("overlay").style.display = "flex";
+    });
+}
+
+
+// This is really poorly written Javascript and is very very messy and inefficient, sorry :)
