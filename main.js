@@ -123,7 +123,7 @@ for (var i = 0; i < random_Array.length; i++) {
 
 // get random image array
 // const randomImage = randomArray(og_image_names, gan_image_names);
-const randomImage = randomArray(og_image_names);
+const randomImage = randomArray(og_image_names, og_image_names);
 
 // fetch og_image_names elemnts in random order
 var randImgArr = randomImage.sort(() => Math.random() - 0.5);
@@ -138,7 +138,7 @@ for (var i = 0; i < randImgArr.length; i++) {
     if (randImgArr[i].includes("Original")) {
         image_div.innerHTML = "<img src='og_images/" + randImgArr[i] + "'>";
     } else {
-        image_div.innerHTML = "<img src='gan_images/" + randImgArr[i] + "'>";
+        image_div.innerHTML = "<img src='og_images/" + randImgArr[i] + "'>";
     }
     images_div.appendChild(image_div);
 }
